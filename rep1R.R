@@ -1,52 +1,59 @@
+#################################
+# SET DIRECTORY STRUCTURE
+#################################
 getwd()
-path <- '/network/rit/lab/ingramlab/OpenStats/CUP2020/rep1'
-path <- 'A:/OpenStats/CUP2020/rep1'
+# if working on research cluster
+#path <- '/network/rit/lab/ingramlab/OpenStats/CUP2020/rep1'
+# if working on local machine
+#path <- 'A:/OpenStats/CUP2020/rep1'
+# if working in container or other virtual environment
+path <- getwd()
 setwd(path)
 getwd()
 
 # dir.create checks whether subdirectories exist; if missing, creates them
+dir.create("./code",showWarnings = TRUE)
 dir.create("./data",showWarnings = TRUE)
 dir.create("./data/original",showWarnings = TRUE)
 dir.create("./data/working",showWarnings = TRUE)
 dir.create("./figures",showWarnings = TRUE)
 dir.create("./tables",showWarnings = TRUE)
+dir.create("./publication",showWarnings = TRUE)
+
+dir()
+
+#################################
+# SET ENVIRONMENT
+#################################
 
 # Change plot size to 4 x 4
 options(repr.plot.width=4, repr.plot.height=4, digits=13)
 
-
+# packages are pre-installed in container environments
 #mypackages <- c("Hmisc", "tidyverse", "GGally", "car", "interplot", "interflex", "gridExtra", "coefplot", "psych")
 #install.packages(mypackages, lib="/network/rit/home/mi122167/Rv363lib", verbose=getOption("verbose"))
 #library(Hmisc, lib.loc = "/network/rit/home/mi122167/Rv363lib")
 
-
-install.packages("pacman") # pacman = package manager
+#install.packages("pacman") # pacman = package manager
 library(pacman) 
 # authors packages
 p_load(Hmisc, tidyverse, GGally, car, interplot, interflex, gridExtra, coefplot, psych)
-
-## this sequence works to load some dependencies first
-#p_load(stringi, Hmisc, 
-#       xml2, rvest, tidyselect, dplyr, tidyr, lubridate, readr, fs, tidyverse, 
-#       GGally, 
-#       openxlsx, car, 
-#       statmod, minqa, AR, sobolseq, timeR, stop, redblack, qsort, rescale, nloptr, interplot, 
-#       reshape2, ModelMetrics, interflex, 
-#       gridExtra, 
-#       coefplot, 
-#       mnormt, psych)
 
 # additional packages
 #p_load(data.table, xtable, stargazer, repr)
 
 sessionInfo()
 
-# read data using relative file path
+########################################
+# read original data using relative file path
 dat <- read.csv("./data/original/metoo_data.csv", stringsAsFactors = FALSE)
 
+########################################
+# save working data file
 datetoday <- gsub("-", "", as.character(Sys.Date()))
 save.image(paste("./data/working/working", datetoday, ".RData", sep=""))
 
+########################################
 ### DATA CLEANING ####### ######
 
 # recode: experimental condition ####
