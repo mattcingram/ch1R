@@ -2,7 +2,7 @@
 
 This repository contains replication files for Replication 1 using the R language.
 
-The files can be downloaded as one compressed folder using the drop-down menu in the "Code" button above.
+The files can be downloaded as one compressed folder using the drop-down menu in the green "Code" button above.
 
 Also, a container (virtual machine) for remote replication online is available here:
 
